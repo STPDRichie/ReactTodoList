@@ -1,16 +1,29 @@
 import React from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 
 import Todo from "./Todo";
 
-const TodoList = ({todoList, handleToggle, handleFilter}) => {
+const selectTodoIds = (state) => state.map((todo) => todo.id);
+
+const TodoList = () => {
+  const todoIds = useSelector(selectTodoIds, shallowEqual);
+  
+  const dispatch = useDispatch();
+  
+  const clearCompleted = () => {
+    dispatch({ type: 'todos/clearCompleted' });
+  }
+  
   return (
     <div className='todo-list'>
-      {todoList.map(todo => {
-        return (
-          <Todo todo={todo} handleToggle={handleToggle} />
-        )
-      })}
-      <button onClick={handleFilter} className='todo-list__clear-button'>Clear Completed Tasks</button>
+      {
+        todoIds.map(todoId => {
+          return (
+            <Todo key={todoId} id={todoId} />
+          )
+        })
+      }
+      <button onClick={clearCompleted} className='todo-list__clear-button'>Clear Completed Tasks</button>
     </div>
   )
 };
