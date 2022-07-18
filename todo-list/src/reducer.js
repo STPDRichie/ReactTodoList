@@ -1,4 +1,6 @@
-const initialState = [];
+import data from './data.json'
+
+const initialState = [...data];
 
 function getNextTaskId(todoList) {
   let taskId = 1;

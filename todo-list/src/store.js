@@ -1,11 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { createStore } from 'redux';
 import todosReducer from './reducer'
 
-const composedEnhancer = composeWithDevTools(
-  applyMiddleware()
-)
-
-const store = createStore(todosReducer, composedEnhancer);
+const store = createStore(todosReducer);
 
 export default store;
